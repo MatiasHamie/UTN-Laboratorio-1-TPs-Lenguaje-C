@@ -1,10 +1,3 @@
-/** \brief Invoca un menu que se actualiza segun como esten los flags
- *
- *
- * \return No devuelve nada, el mismo invoca a otras funciones aritmeticas
- */
-void menu();
-
 /** \brief Ingresando 2 numeros float los suma
  *
  * \param numeroUno float
@@ -44,3 +37,13 @@ float multiplicacionDosNumeros(float numeroUno, float numeroDos);
  *
  */
 float divisionDosNumeros(float numeroUno, float numeroDos);
+
+/** \brief Ingresando 1 numero lo factoriza
+ *
+ * \param Ingresa un numero entero
+ * \param
+ * \return devuelve un flotante como resultado
+ *
+ */
+
+float factorialNumero(int numero);
