@@ -59,7 +59,7 @@ void menu()
                  printf("\tb) Calcular la resta (A-B)\n");
                  printf("\tc) Calcular la division (A/B)\n");
                  printf("\td) Calcular la multiplicacion (A*B)\n");
-                 printf("\te) Calcular el factorial (A!)\n");
+                 printf("\te) Calcular el factorial (A!) y (B!)\n");
                  break;
             case 1:
                  printf("\ta) Calcular la suma (%.2f)+(%.2f)\n",x,y);
