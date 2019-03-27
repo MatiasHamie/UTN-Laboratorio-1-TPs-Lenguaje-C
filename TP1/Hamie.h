@@ -41,9 +41,9 @@ float divisionDosNumeros(float numeroUno, float numeroDos);
 /** \brief Ingresando 1 numero lo factoriza
  *
  * \param Ingresa un numero entero
- * \param
+ *
  * \return devuelve un flotante como resultado
  *
  */
 
-float factorialNumero(int numero);
+float factorialNumero(float numeroUno);
