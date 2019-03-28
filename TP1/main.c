@@ -50,7 +50,7 @@ int main()
             printf("\tb) Calcular la resta (%.2f)-(%.2f)\n",x,y);
             printf("\tc) Calcular la division (%.2f)/(%.2f)\n",x,y);
             printf("\td) Calcular la multiplicacion (%.2f)*(%.2f)\n",x,y);
-            printf("\te) Calcular la factorial (%.2f!)y(%.2f!)\n",x,y);
+            printf("\te) Calcular el factorial (%.2f!)y(%.2f!)\n",x,y);
             break;
         case 2:
             printf("\ta) Se ha calculado la suma\n");
