@@ -4,18 +4,42 @@
 
 int main()
 {
+    /*
+        Variables tipo INT:
+        Flags:  Cada flag tiene la funcion de mostrar un tipo de menu
+                u otro, y la diferencia entre ellos es mostrar
+                los datos del enunciado como solo texto
+                o con las variables A y B actualizadas.
+
+        Opc:    Opcion elegida por el usuario
+    */
     int opc, flagX=0, flagY=0, flagOpc3=0, flagOpc4=0;
-    float x=0, y=0, suma, resta, division, multiplicacion;
+
+    /*
+        Variables tipo FLOAT:
+        X e Y: son los numeros a operar
+    */
+    float x, y, suma, resta, division, multiplicacion;
+
+    // Variable tipo CHAR: condicion para seguir ITERANDO
     char seguir='s';
 
     do
     {
-        system("cls");
+        system("cls");//Borro la pantalla cada vez que itero
 
         printf("********************************\n");
         printf("**         Bienvenido         **\n");
         printf("********************************\n\n");
         printf("Menu de opciones: \n\n");
+
+        /*
+            flagX y flagY:
+            En 0: Muestra solo enunciado
+            En 1: Muestra el enunciado con las variables X e Y
+                  modificadas por el usuario
+        */
+
         if(flagX==1)
         {
             printf("1. Ingrese el 1er operando A=%.2f\n",x);
@@ -35,6 +59,14 @@ int main()
         }
 
         printf("3. Calcular todas las operaciones: \n");
+
+        /*
+            flagOpc3:
+            En 0: Muestra solo enunciado
+            En 1: Muestra el enunciado con las variables X e Y
+                  modificadas por el usuario
+            En 2: Muestra que las operaciones aritmeticas se realizaron
+        */
 
         switch(flagOpc3)
         {
@@ -60,6 +92,14 @@ int main()
             printf("\te) Se han calculado los factoriales de %.2f! y %.2f!\n",x,y);
         }
         printf("4. Informar resultados: \n");
+
+        /*
+            flagOpc4:
+            En 0: Muestra solo enunciado
+            En 1: Muestra los resultados de las operaciones aritmeticas con un condicional
+                  que verifica que si el denominador ingresado por el usuario es 0
+                  muestra la leyenda que no se puede dividir
+        */
 
         if(flagOpc4==1)
         {
@@ -88,22 +128,25 @@ int main()
         printf("5. Salir\n\n");
         printf("Ingrese una opcion: \n");
 
-        scanf("%d",&opc);
+        scanf("%d",&opc);//Guardar la opcion elegida en la variable opc
 
         switch(opc)
         {
-        case 1:
+        case 1://Pido el valor de A (o X) y modifico el printf (punto 1-) del menu
             printf("Ingrese el nuevo valor de x:\n");
             scanf("%f", &x);
             flagX=1;
             break;
-        case 2:
+        case 2:/*Pido el valor de B (o Y) y modifico el printf(punto 2-) del menu.
+                 Como ya ingrese el segundo valor, pongo el flagOpc3 en 1
+                 agregando los valores X y Y al menu de la opcion 3*/
             printf("Ingrese el nuevo valor de y:\n");
             scanf("%f", &y);
             flagY=1;
             flagOpc3=1;
             break;
-        case 3:
+        case 3:/*Pongo el flagOpc3 en 2 mostrando "se ha realizado..."
+                 y llamo a las funciones de cada operacion*/
             flagOpc3=2;
             suma=sumaDosNumeros(x,y);
             resta=restaDosNumeros(x,y);
@@ -112,15 +155,15 @@ int main()
             factorialNumero(x);
             factorialNumero(y);
             break;
-        case 4:
+        case 4://Muestro los resultados
             flagOpc4=1;
             break;
-        case 5:
+        case 5://Modifico el condicional de iteracion para terminar
             printf("El programa ha finalizado\n\n");
             seguir='n';
             system("pause");
             break;
-        default:
+        default://Caso de ingresar una opcion distinta de 1 al 5
             printf("\tLa opcion ingresada es invalida\n");
             system("pause");
             break;
