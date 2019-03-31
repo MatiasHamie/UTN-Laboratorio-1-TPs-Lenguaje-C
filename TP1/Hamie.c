@@ -1,30 +1,30 @@
-float sumaDosNumeros(float numeroUno, float numeroDos)
+int sumaDosNumeros(int numeroUno, int numeroDos)
 {
     return numeroUno+numeroDos;
 }
 
-float restaDosNumeros(float numeroUno, float numeroDos)
+int restaDosNumeros(int numeroUno, int numeroDos)
 {
     return numeroUno-numeroDos;
 }
 
-float multiplicacionDosNumeros(float numeroUno, float numeroDos)
+int multiplicacionDosNumeros(int numeroUno, int numeroDos)
 {
     return numeroUno*numeroDos;
 }
 
-float divisionDosNumeros(float numeroUno, float numeroDos)
+float divisionDosNumeros(int numeroUno, int numeroDos)
 {
-    return numeroUno/numeroDos;
+    return (float)numeroUno/numeroDos;
 }
 
-float factorialNumero(float numeroUno)
+double factorialNumero(int numeroUno)
 {
-    float acumulador;
+   double acumulador;
 
     for(acumulador=1;numeroUno>1;numeroUno--){
 
-            acumulador*=numeroUno;
+        acumulador*=numeroUno;
     }
 
     return acumulador;

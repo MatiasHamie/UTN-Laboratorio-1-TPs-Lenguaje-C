@@ -1,49 +1,49 @@
-/** \brief Ingresando 2 numeros float los suma
+/** \brief Ingresando 2 numeros int los suma
  *
- * \param numeroUno float
- * \param numeroDos float
+ * \param numeroUno int
+ * \param numeroDos int
  *
- * \return Regresa el resultado tipo FLOAT
+ * \return Regresa el resultado tipo int
  *
  */
- float sumaDosNumeros(float numeroUno, float numeroDos);
+ int sumaDosNumeros(int numeroUno, int numeroDos);
 
-/** \brief Ingresando 2 numeros float los resta
+/** \brief Ingresando 2 numeros int los resta
  *
- * \param numeroUno float
- * \param numeroDos float
+ * \param numeroUno int
+ * \param numeroDos int
  *
- * \return Regresa el resultado tipo FLOAT
+ * \return Regresa el resultado tipo int
  *
  */
-float restaDosNumeros(float numeroUno, float numeroDos);
+int restaDosNumeros(int numeroUno, int numeroDos);
 
-/** \brief Ingresando 2 numeros float los multiplica
+/** \brief Ingresando 2 numeros int los multiplica
  *
- * \param numeroUno float
- * \param numeroDos float
+ * \param numeroUno int
+ * \param numeroDos int
  *
- * \return Regresa el resultado tipo FLOAT
+ * \return Regresa el resultado tipo int
  *
  */
-float multiplicacionDosNumeros(float numeroUno, float numeroDos);
+int multiplicacionDosNumeros(int numeroUno, int numeroDos);
 
-/** \brief Ingresando 2 numeros float los divide
+/** \brief Ingresando 2 numeros int los divide
  *
- * \param numeroUno float
- * \param numeroDos float
+ * \param numeroUno int
+ * \param numeroDos int
  *
- * \return Regresa el resultado tipo FLOAT
+ * \return Regresa el resultado tipo int
  *
  */
-float divisionDosNumeros(float numeroUno, float numeroDos);
+float divisionDosNumeros(int numeroUno, int numeroDos);
 
 /** \brief Ingresando 1 numero lo factoriza
  *
- * \param Ingresa un numero entero
+ * \param numeroUno int
  *
- * \return devuelve un flotante como resultado
+ * \return devuelve un entero como resultado
  *
  */
 
-float factorialNumero(float numeroUno);
+double factorialNumero(int numeroUno);
