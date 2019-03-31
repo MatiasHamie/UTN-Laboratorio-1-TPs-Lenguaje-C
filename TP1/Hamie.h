@@ -42,7 +42,7 @@ float divisionDosNumeros(int numeroUno, int numeroDos);
  *
  * \param numeroUno int
  *
- * \return devuelve un entero como resultado
+ * \return devuelve un resultado tipo double
  *
  */
 
