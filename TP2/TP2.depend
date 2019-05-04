@@ -8,3 +8,23 @@
 
 1556943474 c:\users\yotut\desktop\programming\github\utn - tps\lab_prog1\tp_laboratorio_1\tp2\validaciones.h
 
+1556979796 source:c:\users\yotut\desktop\programming\github\utn - tps\lab_prog1\tp_laboratorio_1\tp2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<conio.h>
+	<string.h>
+	"arrayEmployees.h"
+	"validaciones.h"
+
+1556979657 c:\users\yotut\desktop\programming\github\utn - tps\lab_prog1\tp_laboratorio_1\tp2\arrayemployees.h
+
+1556979657 source:c:\users\yotut\desktop\programming\github\utn - tps\lab_prog1\tp_laboratorio_1\tp2\arrayemployees.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<conio.h>
+	<string.h>
+	"arrayEmployees.h"
+	"validaciones.h"
+

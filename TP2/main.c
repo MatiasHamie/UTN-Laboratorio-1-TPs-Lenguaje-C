@@ -4,6 +4,7 @@
 #include <conio.h>
 #include <string.h>
 #include "arrayEmployees.h"
+#include "validaciones.h"
 
 #define LENEMP 11
 #define LENSEC 4
@@ -12,30 +13,45 @@ int main()
 {
     char continueWith='s';
     char confirm;
+    char requestedName[51];
+    char requestedLastName[51];
+    float requestedSalary;
+    int requestedRandomId;
+    int requestedSector;
 
-    Employee listEmp[LENEMP];
-    Sector listSec[LENSEC];
+    Employee employees[LENEMP];
+  // Sectors sectors[LENSEC];
 
-    initEmployees(listEmp,LENEMP);
-    initSectors(listSec,LENSEC);
+    initEmployees(employees,LENEMP);
+    //initSectors(sectors,LENSEC);
 
     do{
         system("cls");
         switch(mainMenu()){
             case 1:
-                addEmployee(listEmp,LENEMP,listSec,LENSEC);
+                //Obtengo randomId del empleado
+                getRandomId(employees,LENEMP,&requestedRandomId);
+                //Obtengo nombre y despues apellido validando el largo y que sean solo solo letras
+                getString(requestedName,"Ingrese el nombre del empleado","Nombre invalido, cantidad de caracteres [min 2 - max 50]",2,50);
+                getString(requestedLastName,"Ingrese el nombre del empleado","Apellido invalido, cantidad de caracteres [min 2 - max 50]",2,50);
+                //Obtengo salario
+                getFloat(&requestedSalary,"Ingrese el salario del empleado","Salario invalido, rango [min 1 - max 999999]",1,100000);
+                //Obtengo id sector
+                chooseSector(&requestedSector,"Elija sector al que pertenece el empleado","Opcion invalida, rango [1-5]",1,5);
+                //Envio los datos del empleado pendiente a cargar a la funcion addEmployee
+                addEmployee(employees,LENEMP,requestedRandomId,requestedName,requestedLastName,requestedSalary,requestedSector);
                 system("pause");
                 break;
             case 2:
-                modifyEmployee(listEmp,TAMALM,listSec,LENSEC);
+               // modifyEmployee(employees,LENEMP,sectors,LENSEC);
                 system("pause");
                 break;
             case 3:
-                removeEmployee(listEmp,LENEMP);
+               // removeEmployee(employees,LENEMP);
                 system("pause");
                 break;
             case 4:
-                reports(listEmp,LENEMP,listSec,LENSEC);
+               // reports(employees,LENEMP,sectors,LENSEC);
                 system("pause");
                 break;
             case 5:
