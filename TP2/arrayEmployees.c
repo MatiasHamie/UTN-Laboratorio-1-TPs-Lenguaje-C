@@ -89,16 +89,43 @@ int findEmployeeById(Employee* employees, int lengthEmp,int id)
 
     for(int i=0;i<lengthEmp;i++){
         if(employees[i].id=id){
-
+            index=i;
         }
     }
-
-    return NULL;
+    return index;
 }
 
-int removeEmployee(Employee* employees, int lengthEmp, int id)
+int removeEmployee(Employee* employees, int lengthEmp, int id, Sectors* sectors, int lengthSec)
 {
- return -1;
+    int validation=0;
+    int index;
+    int idEmployee;
+    char confirm;
+
+    printf("Ingrese legajo del empleado: ");
+    printf("%d",idEmployee);
+
+    index=findEmployeeById(employees,lengthEmp,idEmployee);
+
+    if(index=-1){
+        printf("No se ha encontrado al empleado\n");
+        system("pause");
+        validation=-1;
+        break;
+    }else{
+        printEmployee(employees[index],sectors,lengthSec);
+        printf("Confirma eliminacion?\n");
+        printf("Ingrese s/n: ");
+        scanf("%c",&confirm);
+
+        if(confirm=='s'){
+            employees[index].isEmpty=EMPTY;
+            validation=0;
+        }else{
+            break;
+        }
+    }
+    return validation;
 }
 
 int modifyEmployee(Employee* employees, int lengthEmp, int id)
@@ -265,4 +292,23 @@ int chooseSector(int* input,char message[],char eMessage[], int lowLimit, int hi
     *input=numeroValidado;
 
     return todoOk;
+}
+
+void hardcodeEmployees(Employee* employees, int lengthEmp)
+{
+    Employee auxEmp[]={
+//    ID    Name      LastName    Salary  Sector  IsEmpty
+    {1092,"Matias",   "Hamie",    25000,    1,       1},
+    {1123,"Juan",     "Diaz",     25124,    2,       1},
+    {1241,"Martin",   "Fernandez",25123,    1,       1},
+    {1232,"Sabrina",  "Carrasco", 27918,    3,       1},
+    {1541,"Alejandra","Salerno",  30000,    1,       1},
+    {1142,"Marcos",   "Riso",     21023,    2,       1},
+    {1985,"Jesica",   "Gauto",    41020,    4,       1},
+    {2003,"Nicolas",  "Pardo",    40123,    5,       1},
+    {2010,"Bruno",    "Mujica",   33653,    2,       1},
+    {1405,"Sol",      "Muñoz",    23023,    4,       1},
+    {3001,"Federico", "Vitali",   23023,    3,       1},
+    {2999,"Alberto",  "Riobo",    23023,    5,       1},
+    }
 }
