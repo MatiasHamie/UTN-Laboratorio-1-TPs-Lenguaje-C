@@ -20,7 +20,7 @@ int main()
     int requestedSector;
 
     Employee employees[LENEMP];
-  // Sectors sectors[LENSEC];
+    Sectors sectors[LENSEC];
 
     initEmployees(employees,LENEMP);
     //initSectors(sectors,LENSEC);
@@ -37,7 +37,7 @@ int main()
                 //Obtengo salario
                 getFloat(&requestedSalary,"Ingrese el salario del empleado","Salario invalido, rango [min 1 - max 999999]",1,100000);
                 //Obtengo id sector
-                chooseSector(&requestedSector,"Elija sector al que pertenece el empleado","Opcion invalida, rango [1-5]",1,5);
+                chooseSector(&requestedSector,"Elija sector al que pertenece el empleado","Opcion invalida, rango [1-5]",1,5,sectors,LENSEC);
                 //Envio los datos del empleado pendiente a cargar a la funcion addEmployee
                 addEmployee(employees,LENEMP,requestedRandomId,requestedName,requestedLastName,requestedSalary,requestedSector);
                 system("pause");

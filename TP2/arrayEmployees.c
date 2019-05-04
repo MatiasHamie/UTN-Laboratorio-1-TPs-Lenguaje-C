@@ -82,29 +82,28 @@ int findEmployeeById(Employee* employees, int lengthEmp,int id){
     int index;
 
     for(int i=0;i<lengthEmp;i++){
-        if(employees[i].id=id){
+        if(employees[i].id==id){
             index=i;
         }
     }
     return index;
 }
 
-int removeEmployee(Employee* employees, int lengthEmp, int id, Sectors* sectors, int lengthSec){
+int removeEmployee(Employee* employees, int lengthEmp, Sectors* sectors, int lengthSec){
+    int idEmployee;
     int validation=0;
     int index;
-    int idEmployee;
     char confirm;
 
     printf("Ingrese legajo del empleado a eliminar: ");
-    printf("%d",idEmployee);
+    scanf("%d",&idEmployee);
 
     index=findEmployeeById(employees,lengthEmp,idEmployee);
 
-    if(index=-1){
+    if(index==-1){
         printf("No se ha encontrado al empleado\n");
         system("pause");
         validation=-1;
-        break;
     }else{
         printEmployee(employees[index],sectors,lengthSec);
         printf("Confirma eliminacion?\n");
@@ -115,29 +114,27 @@ int removeEmployee(Employee* employees, int lengthEmp, int id, Sectors* sectors,
             employees[index].isEmpty=EMPTY;
             validation=0;
         }else{
-            break;
+            validation=-1;
         }
     }
     return validation;
 }
 
-int modifyEmployee(Employee* employees, int lengthEmp, int id){
+int modifyEmployee(Employee* employees, int lengthEmp, Sectors* sectors,int lengthSec){
     int validation=0;
     int index;
     int idEmployee;
-    int opcion;
-    char confirm;
+    int option;
 
     printf("Ingrese legajo del empleado a modificar: ");
-    printf("%d",idEmployee);
+    scanf("%d",&idEmployee);
 
     index=findEmployeeById(employees,lengthEmp,idEmployee);
 
-    if(index=-1){
+    if(index==-1){
         printf("No se ha encontrado al empleado\n");
         system("pause");
         validation=-1;
-        break;
     }else{
         printEmployee(employees[index],sectors,lengthSec);
 
@@ -145,13 +142,13 @@ int modifyEmployee(Employee* employees, int lengthEmp, int id){
 
         switch(option){
             case 1:
-                modifyNameEmployee(employees[index]);
+                modifyNameEmployee(employees[index],sectors,lengthSec);
                 break;
             case 2:
-                modifyLastNameEmployee(employees[index]);
+                modifyLastNameEmployee(employees[index],sectors,lengthSec);
                 break;
             case 3:
-                modifySalaryEmployee(employees[index]);
+                modifySalaryEmployee(employees[index],sectors,lengthSec);
                 break;
             case 4:
                 modifySectorEmployee(employees[index],sectors,lengthSec);
@@ -179,14 +176,15 @@ int modifyMenu(){
     return option;
 }
 
-int modifyNameEmployee(Employee employee){
+int modifyNameEmployee(Employee employee, Sectors* sectors, int lengthSec){
     char auxName[51];
+    char confirm;
     int validation;
 
     validation=getString(auxName,"Ingrese el NUEVO nombre del empleado","Nombre invalido, cantidad de caracteres [min 2 - max 50]",2,50);
 
     if(validation==1){
-        printEmployee(employees[index],sectors,lengthSec);
+        printEmployee(employee,sectors,lengthSec);
         printf("Confirma NUEVO nombre: %s? s/n",auxName);
         scanf("%c",&confirm);
 
@@ -194,7 +192,7 @@ int modifyNameEmployee(Employee employee){
             strcpy(employee.name,auxName);
             validation=0;
         }else{
-            break;
+            validation=-1;
         }
     }else{
         validation=-1;
@@ -202,7 +200,7 @@ int modifyNameEmployee(Employee employee){
     return validation;
 }
 
-int modifyLastNameEmployee(Employee employee){
+int modifyLastNameEmployee(Employee employee, Sectors* sectors, int lengthSec){
     char auxLastName[51];
     char confirm;
     int validation;
@@ -210,7 +208,7 @@ int modifyLastNameEmployee(Employee employee){
     validation=getString(auxLastName,"Ingrese el NUEVO apellido del empleado","Apellido invalido, cantidad de caracteres [min 2 - max 50]",2,50);
 
     if(validation==1){
-        printEmployee(employees[index],sectors,lengthSec);
+        printEmployee(employee,sectors,lengthSec);
         printf("Confirma NUEVO apellido: %s? s/n",auxLastName);
         scanf("%c",&confirm);
 
@@ -218,7 +216,7 @@ int modifyLastNameEmployee(Employee employee){
             strcpy(employee.lastName,auxLastName);
             validation=0;
         }else{
-            break;
+            validation=-1;
         }
     }else{
         validation=-1;
@@ -227,14 +225,15 @@ int modifyLastNameEmployee(Employee employee){
     return validation;
 }
 
-int modifySalaryEmployee(Employee employee){
+int modifySalaryEmployee(Employee employee, Sectors* sectors, int lengthSec){
     float auxSalary;
     int validation;
+    char confirm;
 
     validation=getFloat(&auxSalary,"Ingrese el NUEVO salario del empleado","Salario invalido, rango [min 1 - max 999999]",1,100000);
 
     if(validation==1){
-        printEmployee(employees[index],sectors,lengthSec);
+        printEmployee(employee,sectors,lengthSec);
         printf("Confirma NUEVO salario: %.2f? s/n",auxSalary);
         scanf("%c",&confirm);
 
@@ -242,7 +241,7 @@ int modifySalaryEmployee(Employee employee){
             employee.salary=auxSalary;
             validation=0;
         }else{
-            break;
+            validation=-1;
         }
     }else{
         validation=-1;
@@ -255,7 +254,7 @@ int modifySectorEmployee(Employee employee, Sectors* sectors, int lengthSec){
     int auxIdSector;
     int validation;
 
-    validation=chooseSector(&requestedSector,"Elija el NUEVO sector al que pertenece el empleado","Opcion invalida, rango [1-5]",1,5);
+    validation=chooseSector(&auxIdSector,"Elija el NUEVO sector al que pertenece el empleado","Opcion invalida, rango [1-5]",1,5,sectors,LENSEC);
 
     if(validation==1){
         employee.sector=auxIdSector;
@@ -266,7 +265,7 @@ int modifySectorEmployee(Employee employee, Sectors* sectors, int lengthSec){
     return validation;
 }
 
-void hardcodeSectors(Sectors* sectors,int LENSEC){
+void hardcodeSectors(Sectors* sectors,int lengthSec){
     Sectors auxSectors[]={
     {1,"RRHH"},
     {2,"Finanzas"},
@@ -366,12 +365,12 @@ int printEmployee(Employee employee, Sectors* sectors, int lengthSec){
     return 0;
 }
 
-int printSectors(Sectors* sectors, int lengthSec){
+void printSectors(Sectors* sectors, int lengthSec){
     system("cls");
     printf("*** SECTORES ***\n\n");
     for(int i=0;i<lengthSec;i++){
-        if(sectores[i].id>0){
-            printf("%d %4s\n",sectors[i].id, sectors[i].descripcion);
+        if(sectors[i].id>0){
+            printf("%d %4s\n",sectors[i].id, sectors[i].description);
         }
     }
 }
@@ -411,7 +410,7 @@ int chooseSector(int* input,char message[],char eMessage[], int lowLimit, int hi
     do{
         if(todoOk==0){
             system("cls");
-            printSectors(sectors,lengthSec)
+            printSectors(sectors,lengthSec);
             printf("%s : ", message);
             scanf("%s", auxNum);
         }
@@ -456,7 +455,7 @@ void hardcodeEmployees(Employee* employees, int lengthEmp){
     {1405,"Sol",      "Muñoz",    23023,    4,       1},
     {3001,"Federico", "Vitali",   23023,    3,       1},
     {2999,"Alberto",  "Riobo",    23023,    5,       1},
-    }
+    };
 
     for(int i=0;i<lengthEmp;i++){
         employees[i]=auxEmp[i];
