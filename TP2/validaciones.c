@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "inc/input.h"
+#include "validaciones.h"
 
 int getInt(int* input,char message[],char eMessage[], int lowLimit, int hiLimit)
 {

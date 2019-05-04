@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
+#include <conio.h>
+#include <string.h>
+#include "arrayEmployees.h"
 
-
-#define OCUPPIED 1
-#define EMPTY 0
 #define LENEMP 11
 #define LENSEC 4
 
@@ -12,29 +13,29 @@ int main()
     char continueWith='s';
     char confirm;
 
-    eEmpleado listEmp[LENEMP];
-    eSector   listSec[TAMSEC];
+    Employee listEmp[LENEMP];
+    Sector listSec[LENSEC];
 
     initEmployees(listEmp,LENEMP);
-    initSectors(listSec,TAMSEC);
+    initSectors(listSec,LENSEC);
 
     do{
         system("cls");
-        switch(mainMenu(){
+        switch(mainMenu()){
             case 1:
-                addEmployee(listEmp,LENEMP,listSec,TAMSEC);
+                addEmployee(listEmp,LENEMP,listSec,LENSEC);
                 system("pause");
                 break;
             case 2:
-                modifyEmployee(listEmp,TAMALM,listSec,TAMSEC);
+                modifyEmployee(listEmp,TAMALM,listSec,LENSEC);
                 system("pause");
                 break;
             case 3:
-                removeEmployee(listEmp,LENEMP,listSec,TAMSEC);
+                removeEmployee(listEmp,LENEMP);
                 system("pause");
                 break;
             case 4:
-                reports(listEmp,LENEMP,listSec,TAMSEC);
+                reports(listEmp,LENEMP,listSec,LENSEC);
                 system("pause");
                 break;
             case 5:

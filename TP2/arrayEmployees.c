@@ -4,24 +4,12 @@
 #include <conio.h>
 #include <string.h>
 #include "arrayEmployees.h"
+#include "validaciones.h"
 
-typedef struct
-{
-    int id;
-    char name[51];
-    char lastName[51];
-    float salary;
-    int sector;
-    int isEmpty;
-
-} Employee;
-
-typedef struct
-{
-    int id;
-    char description[51];
-
-} Sector;
+#define OCUPPIED 1
+#define EMPTY 0
+#define LENEMP 11
+#define LENSEC 4
 
 int mainMenu()
 {
@@ -57,7 +45,7 @@ int reportsMenu()
 int initEmployees(Employee* employees, int length)
 {
     for(int i=0;i<length;i++){
-        *employees[i].isEmpty=EMPTY;
+        employees[i].isEmpty=EMPTY;
     }
 
     return 0;
@@ -71,18 +59,13 @@ int addEmployee(Employee* employees, int length, int id, char name[],char lastNa
 
     if(index>=0){
         //Obtengo legajo(id)
-        getRandomId(employees[index].id,LENEMP);
+        getRandomId(employees,LENEMP);
         //Obtengo nombre y despues apellido validando el largo y que sean solo solo letras
         getString(employees[index].name,"Ingrese el nombre del empleado","Nombre invalido, cantidad de caracteres [min 2 - max 50]",2,50);
         getString(employees[index].lastName,"Ingrese el nombre del empleado","Apellido invalido, cantidad de caracteres [min 2 - max 50]",2,50);
         //Obtengo salario
         getFloat(employees[index].salary,"Ingrese el salario del empleado","Salario invalido, rango [min 1 - max 999999]");
-
-
-
     }
-
-
     return -1;
 }
 
@@ -102,7 +85,7 @@ int findEmptyIndex(Employee* employees, int length)
 
 int findEmployeeById(Employee* employees, int length,int id)
 {
- return NULL
+ return NULL;
 }
 
 int removeEmployee(Employee* employees, int length, int id)
@@ -143,7 +126,7 @@ int getRandomId(Employee* employees, int length)
 
 void bubbleSorting(Employee* employees, int length, int i, int j)
 {
-    eEmpleado auxEmp;
+    Employee auxEmp;
 
     auxEmp=employee[i];
     employee[i]=employee[j];
