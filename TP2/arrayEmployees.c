@@ -253,15 +253,25 @@ int modifySalaryEmployee(Employee employee, Sectors* sectors, int lengthSec){
 int modifySectorEmployee(Employee employee, Sectors* sectors, int lengthSec){
     int auxIdSector;
     int validation;
+    int indexSector;
+    char confirm;
 
     validation=chooseSector(&auxIdSector,"Elija el NUEVO sector al que pertenece el empleado","Opcion invalida, rango [1-5]",1,5,sectors,LENSEC);
+    indexSector=getSectorDescription(employee.id,sectors,lengthSec);
 
     if(validation==1){
-        employee.sector=auxIdSector;
+        printf("Confirma NUEVO sector: %s? s/n",sectors[indexSector].description);
+        scanf("%c",&confirm);
+
+        if(confirm=='s'){
+            employee.sector=auxIdSector;
+            validation=0;
+        }else{
+            validation=-1;
+        }
     }else{
         validation=-1;
     }
-
     return validation;
 }
 
