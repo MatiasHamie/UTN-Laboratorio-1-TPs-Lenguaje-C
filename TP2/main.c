@@ -6,8 +6,8 @@
 #include "arrayEmployees.h"
 #include "validaciones.h"
 
-#define LENEMP 11
-#define LENSEC 4
+#define LENEMP 20
+#define LENSEC 10
 
 int main()
 {
@@ -23,6 +23,8 @@ int main()
     Sectors sectors[LENSEC];
 
     initEmployees(employees,LENEMP);
+    hardcodeEmployees(employees,LENEMP);
+    hardcodeSectors(sectors,LENSEC);
     //initSectors(sectors,LENSEC);
 
     do{
@@ -47,11 +49,11 @@ int main()
                 system("pause");
                 break;
             case 3:
-               // removeEmployee(employees,LENEMP);
+                removeEmployee(employees,LENEMP,sectors,LENSEC);
                 system("pause");
                 break;
             case 4:
-               // reports(employees,LENEMP,sectors,LENSEC);
+               //reports(employees,LENEMP,sectors,LENSEC);
                 system("pause");
                 break;
             case 5:

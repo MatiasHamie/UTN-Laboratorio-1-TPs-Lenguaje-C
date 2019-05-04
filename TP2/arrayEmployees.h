@@ -25,11 +25,11 @@ int addEmployee(Employee* employees, int length, int id, char name[],char lastNa
 int findEmptyIndex(Employee* employees, int length);
 int findEmployeeById(Employee* employees, int length,int id);
 int removeEmployee(Employee* employees, int lengthEmp, Sectors* sectors, int lengthSec);
-int modifyEmployee(Employee* employees, int length, Sectors* sectors, int lengthSec);
-int modifyNameEmployee(Employee employee, Sectors* sectors, int lengthSec);
-int modifyLastNameEmployee(Employee employee, Sectors* sectors, int lengthSec);
-int modifySalaryEmployee(Employee employee, Sectors* sectors, int lengthSec);
-int modifySectorEmployee(Employee employee, Sectors* sectors, int lengthSec);
+int modifyEmployee(Employee* employees, int lengthEmp, Sectors* sectors, int lengthSec);
+int modifyNameEmployee(Employee* employees, int lengthEmp, Sectors* sectors, int lengthSec, int index);
+int modifyLastNameEmployee(Employee* employees, int lengthEmp, Sectors* sectors, int lengthSec, int index);
+int modifySalaryEmployee(Employee* employees, int lengthEmp, Sectors* sectors, int lengthSec, int index);
+int modifySectorEmployee(Employee* employees, int lengthEmp, Sectors* sectors, int lengthSec, int index);
 int sortEmployees(Employee* employees, int length, int order);
 int printEmployees(Employee* employees, int lengthEmp, Sectors* sectors, int lengthSec);
 int printEmployee(Employee employee, Sectors* sectors, int lengthSec);
