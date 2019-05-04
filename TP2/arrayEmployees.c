@@ -13,8 +13,7 @@
 #define ASCENDING 1
 #define DESCENDING 0
 
-int mainMenu()
-{
+int mainMenu(){
     int option;
 
     printf("*** MENU ABM TP 2 ***\n\n");
@@ -29,8 +28,7 @@ int mainMenu()
     return option;
 }
 
-int reportsMenu()
-{
+int reportsMenu(){
     int option;
 
     system("cls");
@@ -43,16 +41,14 @@ int reportsMenu()
     return option;
 }
 
-int initEmployees(Employee* employees, int lengthEmp)
-{
+int initEmployees(Employee* employees, int lengthEmp){
     for(int i=0;i<lengthEmp;i++){
         employees[i].isEmpty=EMPTY;
     }
     return 0;
 }
 
-int addEmployee(Employee* employees, int lengthEmp, int id, char name[],char lastName[],float salary,int sector)
-{
+int addEmployee(Employee* employees, int lengthEmp, int id, char name[],char lastName[],float salary,int sector){
     int validation=0;
     int index;
 
@@ -70,8 +66,7 @@ int addEmployee(Employee* employees, int lengthEmp, int id, char name[],char las
     return validation;
 }
 
-int findEmptyIndex(Employee* employees, int lengthEmp)
-{
+int findEmptyIndex(Employee* employees, int lengthEmp){
     int index=-1;
 
     for(int i=0;i<lengthEmp;i++){
@@ -83,8 +78,7 @@ int findEmptyIndex(Employee* employees, int lengthEmp)
     return index;
 }
 
-int findEmployeeById(Employee* employees, int lengthEmp,int id)
-{
+int findEmployeeById(Employee* employees, int lengthEmp,int id){
     int index;
 
     for(int i=0;i<lengthEmp;i++){
@@ -95,14 +89,13 @@ int findEmployeeById(Employee* employees, int lengthEmp,int id)
     return index;
 }
 
-int removeEmployee(Employee* employees, int lengthEmp, int id, Sectors* sectors, int lengthSec)
-{
+int removeEmployee(Employee* employees, int lengthEmp, int id, Sectors* sectors, int lengthSec){
     int validation=0;
     int index;
     int idEmployee;
     char confirm;
 
-    printf("Ingrese legajo del empleado: ");
+    printf("Ingrese legajo del empleado a eliminar: ");
     printf("%d",idEmployee);
 
     index=findEmployeeById(employees,lengthEmp,idEmployee);
@@ -128,13 +121,165 @@ int removeEmployee(Employee* employees, int lengthEmp, int id, Sectors* sectors,
     return validation;
 }
 
-int modifyEmployee(Employee* employees, int lengthEmp, int id)
-{
- return -1;
+int modifyEmployee(Employee* employees, int lengthEmp, int id){
+    int validation=0;
+    int index;
+    int idEmployee;
+    int opcion;
+    char confirm;
+
+    printf("Ingrese legajo del empleado a modificar: ");
+    printf("%d",idEmployee);
+
+    index=findEmployeeById(employees,lengthEmp,idEmployee);
+
+    if(index=-1){
+        printf("No se ha encontrado al empleado\n");
+        system("pause");
+        validation=-1;
+        break;
+    }else{
+        printEmployee(employees[index],sectors,lengthSec);
+
+        option=modifyMenu();
+
+        switch(option){
+            case 1:
+                modifyNameEmployee(employees[index]);
+                break;
+            case 2:
+                modifyLastNameEmployee(employees[index]);
+                break;
+            case 3:
+                modifySalaryEmployee(employees[index]);
+                break;
+            case 4:
+                modifySectorEmployee(employees[index],sectors,lengthSec);
+                break;
+            default:
+                printf("Opcion Invalida\n");
+                break;
+        }
+    }
+    return validation;
 }
 
-int sortingMenu(Employee* employees, int lengthEmp)
-{
+int modifyMenu(){
+    int option;
+
+    printf("Que desea modificar?\n");
+    printf("1- Nombre\n");
+    printf("2- Apellido\n");
+    printf("3- Salario\n");
+    printf("4- Sector\n");
+
+    printf("Ingrese opcion: ");
+    scanf("%d",&option);
+
+    return option;
+}
+
+int modifyNameEmployee(Employee employee){
+    char auxName[51];
+    int validation;
+
+    validation=getString(auxName,"Ingrese el NUEVO nombre del empleado","Nombre invalido, cantidad de caracteres [min 2 - max 50]",2,50);
+
+    if(validation==1){
+        printEmployee(employees[index],sectors,lengthSec);
+        printf("Confirma NUEVO nombre: %s? s/n",auxName);
+        scanf("%c",&confirm);
+
+        if(confirm=='s'){
+            strcpy(employee.name,auxName);
+            validation=0;
+        }else{
+            break;
+        }
+    }else{
+        validation=-1;
+    }
+    return validation;
+}
+
+int modifyLastNameEmployee(Employee employee){
+    char auxLastName[51];
+    char confirm;
+    int validation;
+
+    validation=getString(auxLastName,"Ingrese el NUEVO apellido del empleado","Apellido invalido, cantidad de caracteres [min 2 - max 50]",2,50);
+
+    if(validation==1){
+        printEmployee(employees[index],sectors,lengthSec);
+        printf("Confirma NUEVO apellido: %s? s/n",auxLastName);
+        scanf("%c",&confirm);
+
+        if(confirm=='s'){
+            strcpy(employee.lastName,auxLastName);
+            validation=0;
+        }else{
+            break;
+        }
+    }else{
+        validation=-1;
+    }
+
+    return validation;
+}
+
+int modifySalaryEmployee(Employee employee){
+    float auxSalary;
+    int validation;
+
+    validation=getFloat(&auxSalary,"Ingrese el NUEVO salario del empleado","Salario invalido, rango [min 1 - max 999999]",1,100000);
+
+    if(validation==1){
+        printEmployee(employees[index],sectors,lengthSec);
+        printf("Confirma NUEVO salario: %.2f? s/n",auxSalary);
+        scanf("%c",&confirm);
+
+        if(confirm=='s'){
+            employee.salary=auxSalary;
+            validation=0;
+        }else{
+            break;
+        }
+    }else{
+        validation=-1;
+    }
+
+    return validation;
+}
+
+int modifySectorEmployee(Employee employee, Sectors* sectors, int lengthSec){
+    int auxIdSector;
+    int validation;
+
+    validation=chooseSector(&requestedSector,"Elija el NUEVO sector al que pertenece el empleado","Opcion invalida, rango [1-5]",1,5);
+
+    if(validation==1){
+        employee.sector=auxIdSector;
+    }else{
+        validation=-1;
+    }
+
+    return validation;
+}
+
+void hardcodeSectors(Sectors* sectors,int LENSEC){
+    Sectors auxSectors[]={
+    {1,"RRHH"},
+    {2,"Finanzas"},
+    {3,"Telecom."},
+    {4,"Sistemas"},
+    {4,"Gerencia"},
+    };
+
+    for(int i=0;i<LENSEC;i++){
+        sectors[i]=auxSectors[i];
+    }
+}
+int sortingMenu(Employee* employees, int lengthEmp){
     int order;
 
     system("cls");
@@ -149,8 +294,7 @@ int sortingMenu(Employee* employees, int lengthEmp)
     return order;
 }
 
-int sortEmployees(Employee* employees, int lengthEmp, int order)
-{
+int sortEmployees(Employee* employees, int lengthEmp, int order){
     int sortingOk=0;
 
     for(int i=0;i<lengthEmp-1;i++){
@@ -186,8 +330,7 @@ int sortEmployees(Employee* employees, int lengthEmp, int order)
     return sortingOk;
 }
 
-void bubbleSorting(Employee* employees, int length, int i, int j)
-{
+void bubbleSorting(Employee* employees, int length, int i, int j){
     Employee auxEmp;
 
     auxEmp=employees[i];
@@ -195,8 +338,7 @@ void bubbleSorting(Employee* employees, int length, int i, int j)
     employees[j]=auxEmp;
 }
 
-int printEmployees(Employee* employees, int lengthEmp, Sectors* sectors, int lengthSec)
-{
+int printEmployees(Employee* employees, int lengthEmp, Sectors* sectors, int lengthSec){
     system("cls");
 
     printf("%8s %12s %12s %8s %10s\n", "Sector", "Legajo", "Apellido", "Nombre", "Sueldo");
@@ -209,8 +351,7 @@ int printEmployees(Employee* employees, int lengthEmp, Sectors* sectors, int len
     return 0;
 }
 
-int printEmployee(Employee employee, Sectors* sectors, int lengthSec)
-{
+int printEmployee(Employee employee, Sectors* sectors, int lengthSec){
     int index;
 
     system("cls");
@@ -225,8 +366,17 @@ int printEmployee(Employee employee, Sectors* sectors, int lengthSec)
     return 0;
 }
 
-int getRandomId(Employee* employees, int length, int* requestedRandomId)
-{
+int printSectors(Sectors* sectors, int lengthSec){
+    system("cls");
+    printf("*** SECTORES ***\n\n");
+    for(int i=0;i<lengthSec;i++){
+        if(sectores[i].id>0){
+            printf("%d %4s\n",sectors[i].id, sectors[i].descripcion);
+        }
+    }
+}
+
+int getRandomId(Employee* employees, int length, int* requestedRandomId){
     int firstRandomId=1000;
     int index;
     int validation=-1;
@@ -237,13 +387,11 @@ int getRandomId(Employee* employees, int length, int* requestedRandomId)
         employees[index].id=firstRandomId+index;
         validation=0;
     }
-
     return validation;
 }
 
 
-int getSectorDescription(int idEmployee, Sectors* sectors, int lengthSec)
-{
+int getSectorDescription(int idEmployee, Sectors* sectors, int lengthSec){
     int index=-1;
 
     for(int i=0;i<lengthSec;i++){
@@ -251,12 +399,10 @@ int getSectorDescription(int idEmployee, Sectors* sectors, int lengthSec)
             index=i;
         }
     }
-
     return index;
 }
 
-int chooseSector(int* input,char message[],char eMessage[], int lowLimit, int hiLimit)
-{
+int chooseSector(int* input,char message[],char eMessage[], int lowLimit, int hiLimit, Sectors* sectors, int lengthSec){
     int todoOk=0;
     int isInteger=0;
     int numeroValidado=0;
@@ -264,10 +410,11 @@ int chooseSector(int* input,char message[],char eMessage[], int lowLimit, int hi
 
     do{
         if(todoOk==0){
+            system("cls");
+            printSectors(sectors,lengthSec)
             printf("%s : ", message);
             scanf("%s", auxNum);
         }
-
         isInteger=isInt(auxNum);
 
         if(isInteger){
@@ -294,8 +441,7 @@ int chooseSector(int* input,char message[],char eMessage[], int lowLimit, int hi
     return todoOk;
 }
 
-void hardcodeEmployees(Employee* employees, int lengthEmp)
-{
+void hardcodeEmployees(Employee* employees, int lengthEmp){
     Employee auxEmp[]={
 //    ID    Name      LastName    Salary  Sector  IsEmpty
     {1092,"Matias",   "Hamie",    25000,    1,       1},
@@ -310,5 +456,9 @@ void hardcodeEmployees(Employee* employees, int lengthEmp)
     {1405,"Sol",      "Muñoz",    23023,    4,       1},
     {3001,"Federico", "Vitali",   23023,    3,       1},
     {2999,"Alberto",  "Riobo",    23023,    5,       1},
+    }
+
+    for(int i=0;i<lengthEmp;i++){
+        employees[i]=auxEmp[i];
     }
 }

@@ -18,13 +18,18 @@ typedef struct
 
 int mainMenu();
 int reportsMenu();
+int modifyMenu();
 int sortingMenu(Employee* employees, int lengthEmp);
 int initEmployees(Employee* employees, int length);
 int addEmployee(Employee* employees, int length, int id, char name[],char lastName[],float salary,int sector);
 int findEmptyIndex(Employee* employees, int length);
 int findEmployeeById(Employee* employees, int length,int id);
 int removeEmployee(Employee* employees, int length, int id);
-int modifyEmployee(Employee* employees, int length, int id);
+int modifyEmployee(Employee* employees, int length, int id, Sectors* sectors, int lengthSec);
+int modifyNameEmployee(Employee employee);
+int modifyLastNameEmployee(Employee employee);
+int modifySalaryEmployee(Employee employee);
+int modifySectorEmployee(Employee employee, Sectors* sectors, int lengthSec);
 int sortEmployees(Employee* employees, int length, int order);
 int printEmployees(Employee* employees, int lengthEmp, Sectors* sectors, int lengthSec);
 int printEmployee(Employee employee, Sectors* sectors, int lengthSec);

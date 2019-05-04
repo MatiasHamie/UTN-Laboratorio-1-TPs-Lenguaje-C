@@ -33,7 +33,7 @@ int main()
                 getRandomId(employees,LENEMP,&requestedRandomId);
                 //Obtengo nombre y despues apellido validando el largo y que sean solo solo letras
                 getString(requestedName,"Ingrese el nombre del empleado","Nombre invalido, cantidad de caracteres [min 2 - max 50]",2,50);
-                getString(requestedLastName,"Ingrese el nombre del empleado","Apellido invalido, cantidad de caracteres [min 2 - max 50]",2,50);
+                getString(requestedLastName,"Ingrese el apellido del empleado","Apellido invalido, cantidad de caracteres [min 2 - max 50]",2,50);
                 //Obtengo salario
                 getFloat(&requestedSalary,"Ingrese el salario del empleado","Salario invalido, rango [min 1 - max 999999]",1,100000);
                 //Obtengo id sector
@@ -43,7 +43,7 @@ int main()
                 system("pause");
                 break;
             case 2:
-               // modifyEmployee(employees,LENEMP,sectors,LENSEC);
+                modifyEmployee(employees,LENEMP,sectors,LENSEC);
                 system("pause");
                 break;
             case 3:
