@@ -26,19 +26,6 @@ int mainMenu(){
     return option;
 }
 
-int reportsMenu(){
-    int option;
-
-    system("cls");
-    printf("*** MENU de Informes *** \n\n");
-    printf("1- Lista de empleados por orden alfabetico\n");
-    printf("2- Lista de total y promedio de salarios\n");
-    printf("\nIngrese opcion: ");
-    scanf("%d",&option);
-
-    return option;
-}
-
 int initEmployees(Employee* employees, int lengthEmp){
     for(int i=0;i<lengthEmp;i++){
         employees[i].isEmpty=EMPTY;
@@ -74,7 +61,7 @@ int findEmptyIndex(Employee* employees, int lengthEmp){
     int index=-1;
 
     for(int i=0;i<lengthEmp;i++){
-        if(employees[i].isEmpty==0){
+        if(employees[i].isEmpty==EMPTY){
             index=i;
             break;
         }
@@ -325,7 +312,7 @@ int sortingMenu(Employee* employees, int lengthEmp){
     int order;
 
     system("cls");
-    printf("Elegir [A-Z] o [Z-A]");
+    printf("Ordenar [A-Z] o [Z-A]\n");
     printf("1- [A-Z]\n");
     printf("2- [Z-A]\n");
     printf("\nIngrese opcion: ");
@@ -340,28 +327,22 @@ int sortEmployees(Employee* employees, int lengthEmp, int order){
     int sortingOk=0;
 
     for(int i=0;i<lengthEmp-1;i++){
-        for(int j=0;j<lengthEmp;j++){
-            if((strlen(employees[i].lastName)==0)||(employees[i].sector==0)){
-                sortingOk=-1;
-                printf("Error, NULL Pointer\n");
-                system("Pause");
-            }else{
-                if(employees[i].isEmpty==OCCUPIED){
-                    if(order==ASCENDING){
-                        if(employees[i].sector>employees[j].sector){
-                            bubbleSorting(employees,lengthEmp,i,j);
-                        }else{
-                            if((employees[i].sector==employees[j].sector)&&(stricmp(employees[i].lastName,employees[j].lastName)>0)){
-                                bubbleSorting(employees,lengthEmp,i,j);
-                            }
-                        }
+        for(int j=i+1;j<lengthEmp;j++){
+            if(employees[i].isEmpty==OCCUPIED){
+                if(order==ASCENDING){
+                    if(employees[i].sector>employees[j].sector){
+                        bubbleSorting(employees,lengthEmp,i,j);
                     }else{
-                        if(employees[i].sector<employees[j].sector){
+                        if((employees[i].sector==employees[j].sector)&&(stricmp(employees[i].lastName,employees[j].lastName)==1)){
                             bubbleSorting(employees,lengthEmp,i,j);
-                        }else{
-                            if((employees[i].sector==employees[j].sector)&&(stricmp(employees[i].lastName,employees[j].lastName)<0)){
-                                bubbleSorting(employees,lengthEmp,i,j);
-                            }
+                        }
+                    }
+                }else if(order==DESCENDING){
+                    if(employees[i].sector<employees[j].sector){
+                        bubbleSorting(employees,lengthEmp,i,j);
+                    }else{
+                        if((employees[i].sector==employees[j].sector)&&(stricmp(employees[i].lastName,employees[j].lastName)==-1)){
+                            bubbleSorting(employees,lengthEmp,i,j);
                         }
                     }
                 }
@@ -501,4 +482,36 @@ void hardcodeEmployees(Employee* employees, int lengthEmp){
     for(int i=0;i<12;i++){
         employees[i]=auxEmp[i];
     }
+}
+
+int reportsMenu(){
+    int option;
+
+    system("cls");
+    printf("*** MENU de Informes *** \n\n");
+    printf("1- Lista de empleados por orden alfabetico\n");
+    printf("2- Lista de total y promedio de salarios\n");
+    printf("\nIngrese opcion: ");
+    scanf("%d",&option);
+
+    return option;
+}
+
+int reports(Employee* employees, int lengthEmp, Sectors* sectors, int lengthSec){
+
+    int validation=0;
+
+    switch(reportsMenu()){
+        case 1:
+            sortingMenu(employees,lengthEmp);
+            printf("*** EMPLEADOS ORDENADOS ALFABETICAMENTE ***\n\n");
+            printEmployees(employees,lengthEmp,sectors,lengthSec);
+            break;
+        default:
+            printf("Opcion invalida..!!");
+            system("pause");
+            validation=-1;
+            break;
+    }
+    return validation;
 }

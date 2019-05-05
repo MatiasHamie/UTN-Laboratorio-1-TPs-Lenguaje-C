@@ -7,7 +7,7 @@
 #include "validaciones.h"
 
 #define LENEMP 1000
-#define LENSEC 10
+#define LENSEC 5
 
 int main()
 {
@@ -49,26 +49,16 @@ int main()
                 system("pause");
                 break;
             case 2:
-                emptySpace=findEmptyIndex(employees,LENEMP);
-
-                if(emptySpace!=0){
-                    modifyEmployee(employees,LENEMP,sectors,LENSEC);
-                }else{
-                    printf("No hay empleados para modificar..!!\n");
-                }
+                modifyEmployee(employees,LENEMP,sectors,LENSEC);
                 system("pause");
                 break;
 
             case 3:
-                if(emptySpace!=0){
-                    removeEmployee(employees,LENEMP,sectors,LENSEC);
-                }else{
-                    printf("No hay empleados para modificar..!!\n");
-                }
+                removeEmployee(employees,LENEMP,sectors,LENSEC);
                 system("pause");
                 break;
             case 4:
-               //reports(employees,LENEMP,sectors,LENSEC);
+                reports(employees,LENEMP,sectors,LENSEC);
                 system("pause");
                 break;
             case 5:
