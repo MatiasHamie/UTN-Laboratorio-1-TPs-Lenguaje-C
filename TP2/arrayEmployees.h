@@ -21,7 +21,7 @@ int reportsMenu();
 int modifyMenu();
 int sortingMenu(Employee* employees, int lengthEmp);
 int initEmployees(Employee* employees, int length);
-int addEmployee(Employee* employees, int length, int id, char name[],char lastName[],float salary,int sector);
+int addEmployee(Employee* employees, int lengthEmp, int id, char name[],char lastName[],float salary,int sector, Sectors* sectors, int lengthSec);
 int findEmptyIndex(Employee* employees, int length);
 int findEmployeeById(Employee* employees, int length,int id);
 int removeEmployee(Employee* employees, int lengthEmp, Sectors* sectors, int lengthSec);

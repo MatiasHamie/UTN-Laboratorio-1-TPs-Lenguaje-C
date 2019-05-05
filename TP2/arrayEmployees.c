@@ -6,10 +6,8 @@
 #include "arrayEmployees.h"
 #include "validaciones.h"
 
-#define OCUPPIED 1
+#define OCCUPIED 1
 #define EMPTY 0
-#define LENEMP 11
-#define LENSEC 4
 #define ASCENDING 1
 #define DESCENDING 0
 
@@ -48,21 +46,27 @@ int initEmployees(Employee* employees, int lengthEmp){
     return 0;
 }
 
-int addEmployee(Employee* employees, int lengthEmp, int id, char name[],char lastName[],float salary,int sector){
+int addEmployee(Employee* employees, int lengthEmp, int id, char name[],char lastName[],float salary,int sector, Sectors* sectors, int lengthSec){
     int validation=0;
     int index;
 
-    index=findEmptyIndex(employees,LENEMP);
+    index=findEmptyIndex(employees,lengthEmp);
 
-    if(index>=0){
-        employees[index].id=id;
-        strcpy(employees[index].name,name);
-        strcpy(employees[index].lastName,lastName);
-        employees[index].salary=salary;
-        employees[index].sector=sector;
-    }else{
-        validation=-1;
-    }
+    employees[index].id=id;
+    strcpy(employees[index].name,name);
+    strcpy(employees[index].lastName,lastName);
+    employees[index].salary=salary;
+    employees[index].sector=sector;
+    employees[index].isEmpty=OCCUPIED;
+
+    system("cls");
+    printf("*** EMPLEADO A DAR DE ALTA ***\n\n");
+    printf("%8s %12s %12s %12s %12s\n", "Sector", "Legajo", "Apellido", "Nombre", "Sueldo");
+    printf("%8s %12s %12s %12s %12s\n", "------", "------", "--------", "------", "------");
+    printEmployee(employees[index],sectors,lengthSec);
+
+    printf("Empleado dado de alta de forma satisfactoria..!!\n");
+
     return validation;
 }
 
@@ -70,7 +74,7 @@ int findEmptyIndex(Employee* employees, int lengthEmp){
     int index=-1;
 
     for(int i=0;i<lengthEmp;i++){
-        if(employees[i].isEmpty==EMPTY){
+        if(employees[i].isEmpty==0){
             index=i;
             break;
         }
@@ -278,7 +282,7 @@ int modifySectorEmployee(Employee* employees, int lengthEmp, Sectors* sectors, i
     int validation;
     char confirm;
 
-    validation=chooseSector(&auxIdSector,"Elija el NUEVO sector al que pertenece el empleado","Opcion invalida, rango [1-5]",1,5,sectors,LENSEC);
+    validation=chooseSector(&auxIdSector,"Elija el NUEVO sector al que pertenece el empleado","Opcion invalida, rango [1-5]",1,5,sectors,lengthSec);
 
     if(validation==1){
         system("cls");
@@ -342,21 +346,21 @@ int sortEmployees(Employee* employees, int lengthEmp, int order){
                 printf("Error, NULL Pointer\n");
                 system("Pause");
             }else{
-                if(employees[i].isEmpty==OCUPPIED){
+                if(employees[i].isEmpty==OCCUPIED){
                     if(order==ASCENDING){
                         if(employees[i].sector>employees[j].sector){
-                            bubbleSorting(employees,LENEMP,i,j);
+                            bubbleSorting(employees,lengthEmp,i,j);
                         }else{
                             if((employees[i].sector==employees[j].sector)&&(stricmp(employees[i].lastName,employees[j].lastName)>0)){
-                                bubbleSorting(employees,LENEMP,i,j);
+                                bubbleSorting(employees,lengthEmp,i,j);
                             }
                         }
                     }else{
                         if(employees[i].sector<employees[j].sector){
-                            bubbleSorting(employees,LENEMP,i,j);
+                            bubbleSorting(employees,lengthEmp,i,j);
                         }else{
                             if((employees[i].sector==employees[j].sector)&&(stricmp(employees[i].lastName,employees[j].lastName)<0)){
-                                bubbleSorting(employees,LENEMP,i,j);
+                                bubbleSorting(employees,lengthEmp,i,j);
                             }
                         }
                     }
@@ -383,11 +387,10 @@ int printEmployees(Employee* employees, int lengthEmp, Sectors* sectors, int len
     printf("%8s %12s %12s %12s %12s\n", "------", "------", "--------", "------", "------");
 
     for(int i=0;i<lengthEmp;i++){
-        if(employees[i].isEmpty==OCUPPIED){
+        if(employees[i].isEmpty==OCCUPIED){
             printEmployee(employees[i],sectors,lengthSec);
         }
     }
-
     return 0;
 }
 
@@ -404,22 +407,22 @@ int printEmployee(Employee employee, Sectors* sectors, int lengthSec){
 void printSectors(Sectors* sectors, int lengthSec){
     system("cls");
     printf("*** SECTORES ***\n\n");
-    for(int i=0;i<lengthSec;i++){
+    for(int i=0;sectors[i].id!='\0';i++){
         if(sectors[i].id>0){
             printf("%d %4s\n",sectors[i].id, sectors[i].description);
         }
     }
 }
 
-int getRandomId(Employee* employees, int length, int* requestedRandomId){
+int getRandomId(Employee* employees, int lengthEmp, int* requestedRandomId){
     int firstRandomId=1000;
     int index;
     int validation=-1;
 
-    index=findEmptyIndex(employees,LENEMP);
+    index=findEmptyIndex(employees,lengthEmp);
 
     if(index>=0){
-        employees[index].id=firstRandomId+index;
+        *requestedRandomId=firstRandomId+index;
         validation=0;
     }
     return validation;
@@ -479,7 +482,7 @@ int chooseSector(int* input,char message[],char eMessage[], int lowLimit, int hi
 }
 
 void hardcodeEmployees(Employee* employees, int lengthEmp){
-    Employee auxEmp[]={
+    Employee auxEmp[13]={
 //    ID    Name      LastName    Salary  Sector  IsEmpty
     {1092,"Matias",   "Hamie",    25000,    1,       1},
     {1123,"Juan",     "Diaz",     25124,    2,       1},
@@ -490,12 +493,12 @@ void hardcodeEmployees(Employee* employees, int lengthEmp){
     {1985,"Jesica",   "Gauto",    41020,    4,       1},
     {2003,"Nicolas",  "Pardo",    40123,    5,       1},
     {2010,"Bruno",    "Mujica",   33653,    2,       1},
-    {1405,"Sol",      "Munoz",    23023,    4,       1},
-    {3001,"Federico", "Vitali",   23023,    3,       1},
-    {2999,"Alberto",  "Riobo",    23023,    5,       1},
+    {1405,"Sol",      "Munoz",    23053,    4,       1},
+    {3001,"Federico", "Vitali",   23123,    3,       1},
+    {2999,"Alberto",  "Riobo",    23633,    5,       1},
     };
 
-    for(int i=0;i<lengthEmp;i++){
+    for(int i=0;i<12;i++){
         employees[i]=auxEmp[i];
     }
 }
