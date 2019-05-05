@@ -8,8 +8,6 @@
 
 #define OCCUPIED 1
 #define EMPTY 0
-#define ASCENDING 1
-#define DESCENDING 0
 
 int mainMenu(){
     int option;
@@ -329,19 +327,19 @@ int sortEmployees(Employee* employees, int lengthEmp, int order){
     for(int i=0;i<lengthEmp-1;i++){
         for(int j=i+1;j<lengthEmp;j++){
             if(employees[i].isEmpty==OCCUPIED){
-                if(order==ASCENDING){
+                if(order==1){
                     if(employees[i].sector>employees[j].sector){
                         bubbleSorting(employees,lengthEmp,i,j);
                     }else{
-                        if((employees[i].sector==employees[j].sector)&&(stricmp(employees[i].lastName,employees[j].lastName)==1)){
+                        if((employees[i].sector==employees[j].sector)&&(stricmp(employees[i].lastName,employees[j].lastName)>0)){
                             bubbleSorting(employees,lengthEmp,i,j);
                         }
                     }
-                }else if(order==DESCENDING){
+                }else if(order==2){
                     if(employees[i].sector<employees[j].sector){
                         bubbleSorting(employees,lengthEmp,i,j);
                     }else{
-                        if((employees[i].sector==employees[j].sector)&&(stricmp(employees[i].lastName,employees[j].lastName)==-1)){
+                        if((employees[i].sector==employees[j].sector)&&(stricmp(employees[i].lastName,employees[j].lastName)<0)){
                             bubbleSorting(employees,lengthEmp,i,j);
                         }
                     }
