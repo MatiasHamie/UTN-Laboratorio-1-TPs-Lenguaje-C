@@ -482,7 +482,7 @@ int chooseSector(int* input,char message[],char eMessage[], int lowLimit, int hi
 }
 
 void hardcodeEmployees(Employee* employees, int lengthEmp){
-    Employee auxEmp[13]={
+    Employee auxEmp[12]={
 //    ID    Name      LastName    Salary  Sector  IsEmpty
     {1092,"Matias",   "Hamie",    25000,    1,       1},
     {1123,"Juan",     "Diaz",     25124,    2,       1},
