@@ -11,18 +11,6 @@
 int getInt(int* input,char message[],char eMessage[], int lowLimit, int hiLimit);
 
 /**
-* \brief Solicita un número al usuario y lo valida
-* \param input Se carga el numero ingresado
-* \param message Es el mensaje a ser mostrado
-* \param eMessage Es el mensaje a ser mostrado en caso de error
-* \param lowLimit Limite inferior a validar
-* \param hiLimit Limite superior a validar
-* \return Si obtuvo el numero [0] si no [-1]
-*
-*/
-int validNumber(char StringNumber[]);
-
-/**
 * \brief Le pasan un STRING, valida si es INT
 * \param Recibe el numero ingresado auxNum
 * \return Si entero lo modifica y devuelve [0] si no [-1]
@@ -89,7 +77,7 @@ int getString(char* input,char message[],char eMessage[], int lowLimit, int hiLi
 
 /**
 * \brief Le pasan un STRING, valida si tiene solo letras
-* \param Recibe el string auxString
+* \param Recibe un STRING auxiliar
 * \return Si es char devuelve [1] si no [0]
 *
 */

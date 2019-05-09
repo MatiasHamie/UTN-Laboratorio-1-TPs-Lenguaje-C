@@ -38,7 +38,7 @@ int main()
                     getString(requestedName,"Ingrese el nombre del empleado","Nombre invalido, cantidad de caracteres [min 2 - max 50]",2,50);
                     getString(requestedLastName,"Ingrese el apellido del empleado","Apellido invalido, cantidad de caracteres [min 2 - max 50]",2,50);
                     //Obtengo salario
-                    getFloat(&requestedSalary,"Ingrese el salario del empleado","Salario invalido, rango [min 1 - max 999999]",1,100000);
+                    getFloat(&requestedSalary,"Ingrese el salario del empleado","Salario invalido, rango [min 1 - max 999999]",1,1000000);
                     //Obtengo id sector
                     chooseSector(&requestedSector,"Elija sector al que pertenece el empleado","Opcion invalida, rango [1-5]",1,5,sectors,LENSEC);
                     //Envio los datos del empleado pendiente a cargar a la funcion addEmployee
