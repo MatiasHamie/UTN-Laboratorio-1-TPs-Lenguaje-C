@@ -43,8 +43,8 @@ typedef struct
 
 /**
 * \brief  To indicate that all position in the array are empty,
-*         this function put the flag (isEmpty) in TRUE in all
-*         position of the array
+* \brief  this function put the flag (isEmpty) in TRUE in all
+* \brief  position of the array
 *
 * \param  list Employee* Pointer to array of employees
 * \param  lengthEmp int Array
@@ -54,7 +54,7 @@ int initEmployees(Employee* employees, int lengthEmp);
 
 /**
 * \brief  add in a existing list of employees the values received as parameters
-*         in the first empty position
+* \brief  in the first empty position
 *
 * \param  list       employee*
 * \param  lengthEmp  int
@@ -78,6 +78,15 @@ int addEmployee(Employee* employees, int lengthEmp, int id, char name[],char las
 *
 * \return Return employee index position or (-1) if*/
 int findEmployeeById(Employee* employees, int lengthEmp,int id);
+
+/** \brief Remove a Employee by Id (put isEmpty Flag in 1)
+*
+* \param list Employee*
+* \param len int
+* \param id int
+*
+* \return int Return (-1) if Error [Invalid length or NULL pointer or if can't
+*         find a employee] - (0) if Ok*/
 int removeEmployee(Employee* employees, int lengthEmp, Sectors* sectors, int lengthSec);
 int printEmployees(Employee* employees, int lengthEmp, Sectors* sectors, int lengthSec);
 int sortEmployeesByName(Employee* employees, int lengthEmp, int order);
@@ -147,13 +156,21 @@ void hardcodeSectors(Sectors* sectors,int LENSEC);
 int printEmployee(Employee employee, Sectors* sectors, int lengthSec);
 
 /**
+* \brief  recibe vector sectores y lo muestra por pantalla.
+*
+* \param  list      *Sectors
+* \param  lengthSec Int
+*/
+void printSectors(Sectors* sectors, int lengthSec);
+
+/**
 * \brief  Busca el primer legajo libre verificando el primer indice con el
 *          el valor de ".isEmpty" en 1.
 *
 * \param  Variable Local Int index = es el resultado que retorna la funcion
 *         "getSectorDescription" (Indice del sector correspondiente)
 *
-* \return Return 0 - OK*/
+* \return Return Index - OK / -1 - FAIL*/
 int findEmptyIndex(Employee* employees, int lengthEmp);
 
 /**
@@ -243,8 +260,27 @@ int modifyNameEmployee(Employee* employees, int lengthEmp, Sectors* sectors, int
 int modifyLastNameEmployee(Employee* employees, int lengthEmp, Sectors* sectors, int lengthSec, int index);
 
 /**
-* \brief  Recibe el id del empleado, valida que sea solo letras (A-Z) y se encuentre entre
-*         el limite minimo y maximo, y lo reemplaza en la variable nombre del empleado
+* \brief  - Recibe el id del empleado
+* \brief  - Pide un nuevo salario y lo guarda en un auxiliar
+* \brief  - Valida que sea solo numeros enteros y se encuentre entre el limite minimo y maximo
+* \brief  - Reemplaza el nombre por el valor del auxiliar
+*
+* \param  list        Employee*
+* \param  lengthEmp   Int
+* \param  list        Sectors*
+* \param  lengthSec   Int
+* \param  idEmpleado  int
+* \param  auxSalary float
+* \param  confirm     int
+*
+* \return Return 0 - OK / -1 - FAIL*/
+int modifySalaryEmployee(Employee* employees, int lengthEmp, Sectors* sectors, int lengthSec, int index);
+
+/**
+* \brief  - Recibe el id del empleado
+* \brief  - Muestra menu de sectores, pide que se elija uno y lo guarda en un auxiliar
+* \brief  - Valida que sea solo numeros enteros y se encuentre entre el limite minimo y maximo
+* \brief  - Reemplaza el idSector del empleado por el valor del auxiliar nuevo
 *
 * \param  list        Employee*
 * \param  lengthEmp   Int
@@ -255,12 +291,58 @@ int modifyLastNameEmployee(Employee* employees, int lengthEmp, Sectors* sectors,
 * \param  confirm     int
 *
 * \return Return 0 - OK / -1 - FAIL*/
-int modifySalaryEmployee(Employee* employees, int lengthEmp, Sectors* sectors, int lengthSec, int index);
 int modifySectorEmployee(Employee* employees, int lengthEmp, Sectors* sectors, int lengthSec, int index);
 
+/**
+* \brief  - Muestra menu de reportes, pide que se elija una opcion
+*
+* \param  list        Employee*
+* \param  lengthEmp   Int
+* \param  list        Sectors*
+* \param  lengthSec   Int
+*
+* \return Return 0 - OK / -1 - FAIL*/
 int reports(Employee* employees, int lengthEmp, Sectors* sectors, int lengthSec);
 
-void printSectors(Sectors* sectors, int lengthSec);
+/**
+* \brief  - Muestra reporte de
+* \brief  - TOTAL Salarios, Salario promedio, Empleados q superen ese promedio
+*
+* \param  list        Employee*
+* \param  lengthEmp   Int
+*/
+void reportsSalary(Employee* employees, int lengthEmp);
 
+/**
+* \brief  - Muestra menu de sectores, pide que se elija uno y lo guarda en un auxiliar
+* \brief  - Valida que sea solo numeros enteros y se encuentre entre el limite minimo y maximo
+* \brief  - Reemplaza el idSector del empleado por el valor del auxiliar nuevo
+*
+* \param  list        Employee*
+* \param  lengthEmp   Int
+* \param  list        Sectors*
+* \param  lengthSec   Int
+* \param  idEmpleado  int
+* \param  auxLastName char
+* \param  confirm     int
+*
+* \return Return 0 - OK / -1 - FAIL*/
+int chooseSector(int* input,char message[],char eMessage[], int lowLimit, int hiLimit, Sectors* sectors, int lengthSec);
+
+/**
+* \brief  - Muestra menu de ORDENAR APELLIDOs y SECTORES
+*
+* \param  option    int
+*
+* \return Return opcionElegida - OK / -1 - FAIL*/
 int sortingMenu(Employee* employees, int lengthEmp);
+
+/**
+* \brief  - Swapping parameters
+*
+* \param  list        Employee*
+* \param  lengthEmp   Int
+* \param  list        Sectors*
+* \param  lengthSec   Int
+*/
 void bubbleSorting(Employee* employees, int lengthEmp, int i, int j);
