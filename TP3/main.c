@@ -57,7 +57,7 @@ int main()
                 break;
             case 3:
                 if(flagEmpleadosCargados==0){
-                    controller_loadFromText("data.bin",listaEmpleados);
+                    controller_loadFromText("data.csv",listaEmpleados);
                     printf("Se han encontrado y se cargaron empleados encontrados en la BD..!\n\n");
                     system("pause");
                     flagEmpleadosCargados=1;
