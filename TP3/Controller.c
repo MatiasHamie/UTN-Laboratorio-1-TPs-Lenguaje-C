@@ -33,7 +33,7 @@ int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
     return ok;
 }
 
-/** \brief Carga los datos de los empleados desde el archivo data.csv (modo binario).
+/** \brief Carga los datos de los empleados desde el archivo data.bin (modo binario).
  *
  * \param path char*
  * \param pArrayListEmployee LinkedList*
@@ -70,7 +70,9 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
     int ok=-1;
     if(pArrayListEmployee!=NULL){
         int auxId;
+        int auxId2;
         int auxHoras;
+        int largoArray=ll_len(pArrayListEmployee);
         int validacion;
         float auxSueldo;
         char auxNombre[21];
@@ -79,34 +81,50 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
         printf("*** ALTA EMPLEADO ***\n\n");
 
         Employee* newEmp = employee_new();
+        Employee* auxEmp = employee_new();
         if(newEmp!=NULL){
-            validacion=getInt(&auxId,"Ingrese ID","ERROR RANGO[1000-9999], ",1000,9999);
+            validacion=getInt(&auxId,"Ingrese ID","ERROR RANGO[1000-9999], ",1,9999);
             while(validacion==-1){
-                validacion=getInt(&auxId,"Ingrese ID","ERROR RANGO[1000-9999], ",1000,9999);
+                validacion=getInt(&auxId,"Ingrese ID","ERROR RANGO[1000-9999], ",1,9999);
             }
 
-            validacion=getString(auxNombre,"Ingrese nombre","ERROR NOMBRE MUY LARGO, ",3,21);
-            while(validacion==-1){
+            for(int i=0;i<largoArray;i++){
+                auxEmp=(Employee*)ll_get(pArrayListEmployee,i);
+                employee_getId(auxEmp,&auxId2);
+
+                if(auxId2==auxId){
+                    ok=2;
+                    free(auxEmp);
+                    break;
+                }
+            }
+
+            if(ok!=2){
                 validacion=getString(auxNombre,"Ingrese nombre","ERROR NOMBRE MUY LARGO, ",3,21);
-            }
+                while(validacion==-1){
+                    validacion=getString(auxNombre,"Ingrese nombre","ERROR NOMBRE MUY LARGO, ",3,21);
+                }
 
-            strlwr(auxNombre);
-            auxNombre[0]=toupper(auxNombre[0]);
+                strlwr(auxNombre);
+                auxNombre[0]=toupper(auxNombre[0]);
 
-            validacion=getInt(&auxHoras,"Ingrese Horas trabajadas","ERROR RANGO[10-9999], ",10,9999);
-            while(validacion==-1){
-                validacion=getInt(&auxHoras,"Ingrese Horas trabajadas","ERROR RANGO[10-9999], ",1000,9999);
-            }
+                validacion=getInt(&auxHoras,"Ingrese Horas trabajadas","ERROR RANGO[10-9999], ",10,9999);
+                while(validacion==-1){
+                    validacion=getInt(&auxHoras,"Ingrese Horas trabajadas","ERROR RANGO[10-9999], ",1000,9999);
+                }
 
-            validacion=getFloat(&auxSueldo,"Ingrese sueldo","ERROR RANGO[1000-100000], ",1000,100000);
-            while(validacion==-1){
                 validacion=getFloat(&auxSueldo,"Ingrese sueldo","ERROR RANGO[1000-100000], ",1000,100000);
-            }
+                while(validacion==-1){
+                    validacion=getFloat(&auxSueldo,"Ingrese sueldo","ERROR RANGO[1000-100000], ",1000,100000);
+                }
 
-            if(employee_setId(newEmp,auxId) && employee_setNombre(newEmp,auxNombre) &&
-                employee_setHorasTrabajadas(newEmp,auxHoras) && employee_setSueldo(newEmp,auxSueldo)){
-                ll_add(pArrayListEmployee,newEmp);
-                ok=1;
+                if(employee_setId(newEmp,auxId) && employee_setNombre(newEmp,auxNombre) &&
+                    employee_setHorasTrabajadas(newEmp,auxHoras) && employee_setSueldo(newEmp,auxSueldo)){
+                    ll_add(pArrayListEmployee,newEmp);
+                    ok=1;
+                    printf("Agrego el empleado ..!\n\n");
+                    system("pause");
+                }
             }
         }else{
             ok=0;

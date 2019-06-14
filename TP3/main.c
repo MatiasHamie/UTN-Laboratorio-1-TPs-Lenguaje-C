@@ -21,6 +21,7 @@ int main()
 {
     LinkedList* listaEmpleados = ll_newLinkedList();
     char seguir='s';
+    int flagEmpleadosCargados=0;
     do{
         switch(menu())
         {
@@ -34,6 +35,7 @@ int main()
                         break;
                     case 1:
                         printf("Se cargo la informacion de forma exitosa..!!\n");
+                        flagEmpleadosCargados=1;
                         break;
                 }
                 system("pause");
@@ -48,11 +50,18 @@ int main()
                         break;
                     case 1:
                         printf("Se cargo la informacion de forma exitosa..!!\n");
+                        flagEmpleadosCargados=1;
                         break;
                 }
                 system("pause");
                 break;
             case 3:
+                if(flagEmpleadosCargados==0){
+                    controller_loadFromText("data.bin",listaEmpleados);
+                    printf("Se han encontrado y se cargaron empleados encontrados en la BD..!\n\n");
+                    system("pause");
+                    flagEmpleadosCargados=1;
+                }
                 switch(controller_addEmployee(listaEmpleados)){
                     case -1:
                         printf("ERROR: Se recibio una lista con valor NULL..!!\n");
@@ -62,6 +71,9 @@ int main()
                         break;
                     case 1:
                         printf("Empleado creado de forma satisfactoria..!!\n");
+                        break;
+                    case 2:
+                        printf("ERROR: Ya existe un empleado con ese ID..!!\n");
                         break;
                 }
                 system("pause");

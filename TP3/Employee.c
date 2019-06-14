@@ -4,6 +4,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+/** \brief Escribe el ID del empleado
+ *
+ * \param this Employee*
+ * \param id int
+ * \return int ok (1 = Ok, 0 = Error)
+ *
+ */
 int employee_setId(Employee* this,int id){
     int todoOk=0;
 
@@ -15,6 +22,13 @@ int employee_setId(Employee* this,int id){
     return todoOk;
 }
 
+/** \brief Obtiene el ID de un empleado
+ *
+ * \param this Employee*
+ * \param id int*
+ * \return int ok (1 = Ok, 0 = Error)
+ *
+ */
 int employee_getId(Employee* this,int* id){
     int todoOk=0;
 
@@ -26,10 +40,17 @@ int employee_getId(Employee* this,int* id){
     return todoOk;
 }
 
+/** \brief Escribe el Nombre del empleado
+ *
+ * \param this Employee*
+ * \param nombre char*
+ * \return int ok (1 = Ok, 0 = Error)
+ *
+ */
 int employee_setNombre(Employee* this,char* nombre){
     int todoOk=0;
 
-    if(this!=NULL && nombre!=NULL && strlen(nombre)>3){
+    if(this!=NULL && nombre!=NULL && strlen(nombre)>1){
         strcpy(this->nombre,nombre);
         todoOk=1;
     }
@@ -37,6 +58,13 @@ int employee_setNombre(Employee* this,char* nombre){
     return todoOk;
 }
 
+/** \brief Obtiene el Nombre del empleado
+ *
+ * \param this Employee*
+ * \param nombre char*
+ * \return int ok (1 = Ok, 0 = Error)
+ *
+ */
 int employee_getNombre(Employee* this,char* nombre){
     int todoOk=0;
 
@@ -48,6 +76,13 @@ int employee_getNombre(Employee* this,char* nombre){
     return todoOk;
 }
 
+/** \brief Escribe las horas trabajadas del empleado
+ *
+ * \param this Employee*
+ * \param horasTrabajadas int
+ * \return int ok (1 = Ok, 0 = Error)
+ *
+ */
 int employee_setHorasTrabajadas(Employee* this,int horasTrabajadas){
     int todoOk=0;
 
@@ -59,6 +94,13 @@ int employee_setHorasTrabajadas(Employee* this,int horasTrabajadas){
     return todoOk;
 }
 
+/** \brief Obtiene las horas trabajadas del empleado
+ *
+ * \param this Employee*
+ * \param horasTrabajadas int*
+ * \return int ok (1 = Ok, 0 = Error)
+ *
+ */
 int employee_getHorasTrabajadas(Employee* this,int* horasTrabajadas){
     int todoOk=0;
 
@@ -69,6 +111,14 @@ int employee_getHorasTrabajadas(Employee* this,int* horasTrabajadas){
 
     return todoOk;
 }
+
+/** \brief Escribe el sueldo del empleado
+ *
+ * \param this Employee*
+ * \param sueldo float
+ * \return int ok (1 = Ok, 0 = Error)
+ *
+ */
 int employee_setSueldo(Employee* this,float sueldo){
     int todoOk=0;
 
@@ -80,6 +130,13 @@ int employee_setSueldo(Employee* this,float sueldo){
     return todoOk;
 }
 
+/** \brief Obtiene el sueldo del empleado
+ *
+ * \param this Employee*
+ * \param sueldo float*
+ * \return int ok (1 = Ok, 0 = Error)
+ *
+ */
 int employee_getSueldo(Employee* this,float* sueldo){
     int todoOk=0;
 
@@ -91,6 +148,11 @@ int employee_getSueldo(Employee* this,float* sueldo){
     return todoOk;
 }
 
+/** \brief Inicializa los campos de un Empleado
+ *
+ * \return Employee*
+ *
+ */
 Employee* employee_new(){
     Employee* this= (Employee*)malloc(sizeof(Employee));
 
@@ -103,6 +165,15 @@ Employee* employee_new(){
 
     return this;
 }
+/** \brief Asigna parametros a campos de un empleado
+ *
+ * \param idStr char*
+ * \param nombreStr char*
+ * \param horasTrabajadasStr char*
+ * \param sueldoStr char*
+ * \return Employee* this
+ *
+ */
 Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajadasStr,char* sueldoStr){
     Employee* this;
 
@@ -122,6 +193,12 @@ Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajad
     return this;
 }
 
+/** \brief Muestra un empleado
+ *
+ * \param emp Employee*
+ * \return void
+ *
+ */
 void mostrarEmpleado(Employee* emp){
     if(emp!=NULL){
         printf("%4d %15s %8d %14.2f\n",emp->id,emp->nombre,emp->horasTrabajadas,emp->sueldo);
@@ -130,6 +207,13 @@ void mostrarEmpleado(Employee* emp){
     }
 }
 
+/** \brief Compara ID de 2 empleados
+ *
+ * \param emp1 void*
+ * \param emp2 void*
+ * \return int retorno (1-> el primero mayor, -1-> el segundo mayor)
+ *
+ */
 int ordenarPorId(void* emp1,void* emp2){
     int retorno=0;
     Employee* p1=employee_new();
@@ -151,6 +235,13 @@ int ordenarPorId(void* emp1,void* emp2){
     return retorno;
 }
 
+/** \brief Compara nombres de 2 empleados
+ *
+ * \param emp1 void*
+ * \param emp2 void*
+ * \return int retorno (1-> el primero mayor, -1-> el segundo mayor)
+ *
+ */
 int ordenarPorNombre(void* emp1,void* emp2){
     int retorno=0;
     Employee* p1=employee_new();
@@ -172,6 +263,13 @@ int ordenarPorNombre(void* emp1,void* emp2){
     return retorno;
 }
 
+/** \brief Compara Horas trabajadas de 2 empleados
+ *
+ * \param emp1 void*
+ * \param emp2 void*
+ * \return int retorno (1-> el primero mayor, -1-> el segundo mayor)
+ *
+ */
 int ordenarPorHoras(void* emp1,void* emp2){
     int retorno=0;
     Employee* p1=employee_new();
@@ -193,6 +291,13 @@ int ordenarPorHoras(void* emp1,void* emp2){
     return retorno;
 }
 
+/** \brief Compara el sueldo de dos empleados
+ *
+ * \param emp1 void*
+ * \param emp2 void*
+ * \return int retorno (1-> el primero mayor, -1-> el segundo mayor)
+ *
+ */
 int ordenarPorSueldo(void* emp1,void* emp2){
     int retorno=0;
     Employee* p1=employee_new();
@@ -214,6 +319,11 @@ int ordenarPorSueldo(void* emp1,void* emp2){
     return retorno;
 }
 
+/** \brief Muestra un menu
+ *
+ * \return int opcion
+ *
+ */
 int menu(){
     int opcion=0;
     int validacion=0;
@@ -239,6 +349,11 @@ int menu(){
     return opcion;
 }
 
+/** \brief Muestra un menu
+ *
+ * \return int opcion
+ *
+ */
 int menuModificar(){
     int opcion=0;
     int validacion=0;
@@ -258,6 +373,11 @@ int menuModificar(){
     return opcion;
 }
 
+/** \brief
+ *
+ * \return int
+ *
+ */
 int menuOrdenar(){
     int opcion=0;
     int validacion=0;
