@@ -1,0 +1,54 @@
+# depslib dependency file v1.0
+1560542490 source:c:\users\yotut\desktop\programming\github\utn - tps\lab_prog1\tp_laboratorio_1\tp3_llpersonal\controller.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"LinkedList.h"
+	"Employee.h"
+	"validaciones.h"
+	"parser.h"
+
+1561382492 c:\users\yotut\desktop\programming\github\utn - tps\lab_prog1\tp_laboratorio_1\tp3_llpersonal\linkedlist.h
+
+1561398242 c:\users\yotut\desktop\programming\github\utn - tps\lab_prog1\tp_laboratorio_1\tp3_llpersonal\employee.h
+
+1557521195 c:\users\yotut\desktop\programming\github\utn - tps\lab_prog1\tp_laboratorio_1\tp3_llpersonal\validaciones.h
+
+1559597366 c:\users\yotut\desktop\programming\github\utn - tps\lab_prog1\tp_laboratorio_1\tp3_llpersonal\parser.h
+
+1561398243 source:c:\users\yotut\desktop\programming\github\utn - tps\lab_prog1\tp_laboratorio_1\tp3_llpersonal\employee.c
+	"Employee.h"
+	"validaciones.h"
+	<string.h>
+	<stdlib.h>
+	<stdio.h>
+
+1561398242 source:c:\users\yotut\desktop\programming\github\utn - tps\lab_prog1\tp_laboratorio_1\tp3_llpersonal\main.c
+	<stdio.h>
+	<stdlib.h>
+	"LinkedList.h"
+	"Controller.h"
+	"Employee.h"
+
+1560542490 c:\users\yotut\desktop\programming\github\utn - tps\lab_prog1\tp_laboratorio_1\tp3_llpersonal\controller.h
+
+1561397866 source:c:\users\yotut\desktop\programming\github\utn - tps\lab_prog1\tp_laboratorio_1\tp3_llpersonal\parser.c
+	<stdio.h>
+	<stdlib.h>
+	"LinkedList.h"
+	"Employee.h"
+
+1557522196 source:c:\users\yotut\desktop\programming\github\utn - tps\lab_prog1\tp_laboratorio_1\tp3_llpersonal\validaciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"validaciones.h"
+
+1561398242 source:c:\users\yotut\desktop\programming\github\utn - tps\lab_prog1\tp_laboratorio_1\tp3_llpersonal\linkedlist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"LinkedList.h"
+
